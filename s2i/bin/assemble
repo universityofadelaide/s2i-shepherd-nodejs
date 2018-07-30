@@ -36,9 +36,9 @@ if [ -n "$NPM_MIRROR"]; then
 fi
 
 echo "---> Install node dependencies"
-npm install $NODE_ENV
+npm install "--${NODE_ENV}"
 
 echo "---> Run build command"
-if [-n "$NPM_BUILD"]; then
+if [ -n "$NPM_BUILD"]; then
     npm run $NPM_BUILD
 fi
