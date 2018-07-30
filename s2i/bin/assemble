@@ -36,4 +36,9 @@ if [ -n "$NPM_MIRROR"]; then
 fi
 
 echo "---> Build Node application from source"
-npm install -d
+npm install $NODE_ENV
+
+echo "---> Running build process from source"
+if [-n "$NPM_BUILD"]; then
+    npm run $NPM_BUILD
+fi
