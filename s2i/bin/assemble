@@ -31,7 +31,7 @@ echo "---> Cleaning up..."
 find . -name .git -type d -exec rm -rf {} +
 
 # Change npm registry mirror if provided
-if [ -n "$NPM_MIRROR"]; then
+if [ -n "$NPM_MIRROR" ]; then
     npm config set registry $NPM_MIRROR
 fi
 
@@ -39,6 +39,6 @@ echo "---> Install node dependencies"
 npm install "--${NODE_ENV}"
 
 echo "---> Run build command"
-if [ -n "$NPM_BUILD"]; then
+if [ -n "$NPM_BUILD" ]; then
     npm run $NPM_BUILD
 fi
