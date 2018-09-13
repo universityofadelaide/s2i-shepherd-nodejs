@@ -27,9 +27,10 @@ RUN apt-get update \
 && locale-gen en_AU.UTF-8 \
 && apt-get -y dist-upgrade \
 && apt-get -y install build-essential npm curl openssh-client wget ssmtp git mysql-client \
-&& curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - \
-&& apt-get -y install nodejs \
 && apt-get -y autoremove && apt-get -y autoclean && apt-get clean && rm -rf /var/lib/apt/lists /tmp/* /var/tmp/*
+
+RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash - \
+&& apt-get -y install nodejs 
 
 # Make bash the default shell.
 RUN ln -sf /bin/bash /bin/sh
