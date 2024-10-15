@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:24.04
 
 LABEL io.k8s.description="Platform for serving Node JS apps in Shepherd" \
       io.k8s.display-name="Shepherd Node JS" \
@@ -8,7 +8,7 @@ LABEL io.k8s.description="Platform for serving Node JS apps in Shepherd" \
 
 ENV DEBIAN_FRONTEND noninteractive
 
-ENV NODEJS_VERSION=8 \
+ENV NODEJS_VERSION=18 \
     NPM_RUN=start \
     NAME=nodejs \
     NPM_CONFIG_PREFIX=$HOME/.npm-global \
@@ -29,8 +29,8 @@ RUN apt-get update \
 && apt-get -y install build-essential curl openssh-client wget ssmtp git mysql-client \
 && apt-get -y autoremove && apt-get -y autoclean && apt-get clean && rm -rf /var/lib/apt/lists /tmp/* /var/tmp/*
 
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-&& apt-get -y install nodejs 
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - \
+&& apt-get -y install nodejs
 
 # Make bash the default shell.
 RUN ln -sf /bin/bash /bin/sh
@@ -48,12 +48,12 @@ EXPOSE 8080
 WORKDIR /code
 
 RUN chown -R 33:0 /code \
-&& chown -R 33:0 /shared \ 
-&& chown -R 33:0 /.npm-global 
+&& chown -R 33:0 /shared \
+&& chown -R 33:0 /.npm-global
 
-RUN chmod -R g+rwX /code \ 
+RUN chmod -R g+rwX /code \
 && chmod -R g+rwX /shared \
-&& chmod -R g+rwX /.npm-global 
+&& chmod -R g+rwX /.npm-global
 
 RUN usermod -d /code www-data
 
